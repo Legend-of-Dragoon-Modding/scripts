@@ -1,0 +1,2144 @@
+entrypoint :ENTRYPOINT_0
+data 0x10c
+data 0xf00ff2d
+data 0x49
+data 0x0
+data 0x930238
+data 0x2000000
+data 0x2000008
+data 0x20242
+data 0x2000008
+data 0x900fffc
+data 0x49
+data 0x0
+data 0x930238
+data 0x200001c
+data 0x2000008
+data 0x20242
+data 0x2000008
+data 0x900fffc
+data 0x49
+data 0x60341
+data 0x1000000
+data 0x2
+data 0x3071c00
+data 0x9000030
+data 0x60341
+data 0x1000000
+data 0x40
+data 0x3071c00
+data 0x9000039
+data 0xa90338
+data 0x200001c
+data 0x1000000
+data 0x5
+data 0x2000008
+data 0x60341
+data 0x1000000
+data 0x10
+data 0x2000008
+data 0x900002f
+data 0xb10338
+data 0x200001c
+data 0x2
+data 0x2000008
+data 0x50242
+data 0x2000008
+data 0x9000026
+data 0xb10338
+data 0x200001c
+data 0x6
+data 0x2000009
+data 0x221
+data 0x4
+data 0x2000009
+data 0x50341
+data 0x2000009
+data 0x2000008
+data 0x9000038
+data 0xa90338
+data 0x200001c
+data 0x1000000
+data 0x5
+data 0x2000008
+data 0x60341
+data 0x1000000
+data 0x40
+data 0x2000008
+data 0x9000021
+data 0x8f0238
+data 0x200001c
+data 0x2000008
+data 0x20341
+data 0x0
+data 0x2000008
+data 0x9000034
+data 0x1420238
+data 0x200001c
+data 0x0
+data 0x920238
+data 0x200001c
+data 0x1
+data 0x49
+data 0x8f0238
+data 0x200001c
+data 0x2000008
+data 0x20341
+data 0xe
+data 0x2000008
+data 0x9000026
+data 0x1420238
+data 0x200001c
+data 0xe
+data 0x920238
+data 0x200001c
+data 0x0
+data 0x49
+data 0x8f0238
+data 0x200001c
+data 0x2000008
+data 0x20341
+data 0xa
+data 0x2000008
+data 0x9000018
+data 0x1420238
+data 0x200001c
+data 0xa
+data 0x920238
+data 0x200001c
+data 0x1
+data 0x49
+data 0x8f0238
+data 0x200001c
+data 0x2000008
+data 0x20341
+data 0xb
+data 0x2000008
+data 0x900000a
+data 0x1420238
+data 0x200001c
+data 0xb
+data 0x920238
+data 0x200001c
+data 0x1
+data 0x49
+data 0x1730338
+data 0x200001c
+data 0x200000a
+data 0x0
+data 0x208
+data 0x2000008
+data 0x10050a80
+data 0x208
+data 0x5
+data 0x10000a80
+data 0xa80338
+data 0x200001e
+data 0x2000008
+data 0x25
+data 0x1ed0138
+data 0x200001e
+data 0x208
+data 0x2000008
+data 0xf00772d
+data 0xa90338
+data 0x200001e
+data 0x48
+data 0x2000009
+data 0x60341
+data 0x80
+data 0x2000009
+data 0x900000a
+data 0x1e00338
+data 0x200001e
+data 0x200001c
+data 0x2000009
+data 0x140
+data 0x9000006
+data 0x1fb0338
+data 0x200001e
+data 0x200001c
+data 0x2000009
+data 0x20242
+data 0x2000009
+data 0x900001b
+data 0x148
+data 0x900001c
+data 0x208
+data 0x2000009
+data 0xf00772d
+data 0x20242
+data 0x2000008
+data 0x900000f
+data 0xa90338
+data 0x200001e
+data 0x5
+data 0x2000009
+data 0x70341
+data 0x1000000
+data 0x8
+data 0x2000009
+data 0x9000008
+data 0x216
+data 0x1
+data 0x2000008
+data 0x208
+data 0xf00772d
+data 0x2000009
+data 0x49
+data 0x208
+data 0xffffffff
+data 0x2000008
+data 0x49
+data 0xa90338
+data 0x200001e
+data 0x48
+data 0x2000008
+data 0x60341
+data 0x80
+data 0x2000008
+data 0x900000a
+data 0x1e10438
+data 0x200001e
+data 0x200001c
+data 0x2000008
+data 0x200000a
+data 0x49
+data 0x1ec0538
+data 0x200001e
+data 0x200001c
+data 0xf00772d
+data 0x2000008
+data 0x200000a
+data 0x49
+
+; SUBROUTINE
+LABEL_0:
+call Battle::scriptGetBentSlot, stor[28], stor[10], 0x0 ; bentIndex, charOrBentSlot, mode
+mov stor[8], var[128 + stor[10]][5] ; source, dest
+mov 0x3, var[128 + stor[10]][0] ; source, dest
+call Battle::scriptSetBentStat, stor[30], stor[8], ITEM_ID ; bentIndex, value, statIndex
+mov stor[8], var[45][119] ; source, dest
+call Battle::scriptSetTempItemMagicStats, stor[30] ; bentIndex
+call Battle::scriptCheckItemHit, stor[30], stor[28], stor[9] ; attackerIndex, defenderIndex, hit
+jmp_cmp ==, 0x0, stor[9], inl[:LABEL_2] ; operand, left, right, addr
+call Battle::scriptItemMagicAttack, stor[30], stor[28], stor[8], stor[8], stor[10] ; attackerIndex, defenderIndex, unused, damage, specialEffects
+mov stor[10], var[45][119] ; source, dest
+jmp_cmp ==, 0x0, stor[8], inl[:LABEL_1] ; operand, left, right, addr
+call Battle::scriptGetBentStat, stor[30], ITEM_PERCENTAGE, stor[10] ; bentIndex, statIndex, value
+jmp_cmp !=, 0x0, stor[10], inl[:LABEL_1] ; operand, left, right, addr
+call Battle::scriptGetBentStat, stor[30], STATUS, stor[10] ; bentIndex, statIndex, value
+jmp_cmp !&, 0x8, stor[10], inl[:LABEL_1] ; operand, left, right, addr
+shr 0x1, stor[8] ; shift, val
+LABEL_1:
+mov var[45][119], stor[10] ; source, dest
+return
+LABEL_2:
+mov 0xffffffff, stor[8] ; source, dest
+mov 0xfffffffe, stor[10] ; source, dest
+return
+data 0xa80338
+data 0x200001e
+data 0x2000008
+data 0x25
+data 0x1ed0138
+data 0x200001e
+data 0x208
+data 0x2000008
+data 0xf00772d
+data 0x1fb0338
+data 0x200001e
+data 0x200001c
+data 0x2000009
+data 0x20242
+data 0x2000009
+data 0x9000021
+data 0x1730338
+data 0x200001c
+data 0x200000a
+data 0x0
+data 0x208
+data 0x2000008
+data 0x10050a80
+data 0x208
+data 0x2
+data 0x10000a80
+data 0x208
+data 0x200001e
+data 0x10030a80
+data 0x208
+data 0x2000008
+data 0x10020a80
+data 0xa90338
+data 0x200001e
+data 0x50
+data 0x2000008
+data 0x208
+data 0x2000008
+data 0x10010a80
+data 0x1ec0538
+data 0x200001e
+data 0x200001c
+data 0xf00772d
+data 0x2000008
+data 0x200000a
+data 0x49
+data 0x208
+data 0xffffffff
+data 0x2000008
+data 0x49
+data 0x1730338
+data 0x2000000
+data 0x2000008
+data 0x0
+data 0x208
+data 0x1
+data 0x2000009
+data 0x215
+data 0x2000008
+data 0x2000009
+data 0x211
+data 0x2000009
+data 0xf00f62d
+data 0x49
+data 0x1730338
+data 0x2000000
+data 0x2000008
+data 0x0
+data 0x208
+data 0x1
+data 0x2000009
+data 0x215
+data 0x2000008
+data 0x2000009
+data 0x11d
+data 0x2000009
+data 0x11c
+data 0x2000009
+data 0x210
+data 0x2000009
+data 0xf00f62d
+data 0x49
+data 0x10c
+data 0x2000008
+data 0x70341
+data 0x1000000
+data 0x200000
+data 0x3071c00
+data 0x9000007
+data 0x11b
+data 0x2000008
+data 0x49
+data 0x357
+data 0x200001c
+data 0xa
+data 0x2000008
+data 0x0
+data 0x60341
+data 0x1000000
+data 0x200000
+data 0x3071c00
+data 0x900ffff
+data 0x0
+data 0x0
+data 0x49
+data 0x60341
+data 0x1000000
+data 0x40
+data 0x3071c00
+data 0x9000029
+data 0xb10338
+data 0x200001c
+data 0x2
+data 0x200000a
+data 0x218
+data 0x2000008
+data 0x200000a
+data 0xb10338
+data 0x200001c
+data 0x6
+data 0x2000009
+data 0x50341
+data 0x2000009
+data 0x200000a
+data 0x9000011
+data 0xb10338
+data 0x200001c
+data 0x2
+data 0x2000008
+data 0x208
+data 0x2000009
+data 0x200000a
+data 0x219
+data 0x2000008
+data 0x2000009
+data 0x208
+data 0x2000009
+data 0x2000008
+data 0x1ee0338
+data 0x200001c
+data 0x2000008
+data 0x7
+data 0xb20338
+data 0x200001c
+data 0x200000a
+data 0x2
+data 0x49
+data 0x60341
+data 0x1000000
+data 0x40
+data 0x3071c00
+data 0x9000029
+data 0xa90338
+data 0x200001c
+data 0x4
+data 0x200000a
+data 0x218
+data 0x2000008
+data 0x200000a
+data 0xa90338
+data 0x200001c
+data 0x7
+data 0x2000009
+data 0x50341
+data 0x2000009
+data 0x200000a
+data 0x9000011
+data 0xa90338
+data 0x200001c
+data 0x4
+data 0x2000008
+data 0x208
+data 0x2000009
+data 0x200000a
+data 0x219
+data 0x2000008
+data 0x2000009
+data 0x208
+data 0x2000009
+data 0x2000008
+data 0x1ee0338
+data 0x200001c
+data 0x2000008
+data 0xc
+data 0xb20338
+data 0x200001c
+data 0x200000a
+data 0x4
+data 0x49
+data 0x60341
+data 0x1000000
+data 0x40
+data 0x3071c00
+data 0x900001f
+data 0x1e70338
+data 0x200001c
+data 0x2000008
+data 0x2000009
+data 0x1ee0338
+data 0x200001c
+data 0x2000008
+data 0xd
+data 0x70341
+data 0x1000000
+data 0x2
+data 0x3071c00
+data 0x9000012
+data 0x221
+data 0x64
+data 0x2000008
+data 0x1730338
+data 0x200001c
+data 0x2000009
+data 0x1
+data 0x218
+data 0x45
+data 0x2000009
+data 0x218
+data 0x2000008
+data 0x700092d
+data 0x49
+data 0x0
+data 0x208
+data 0x5000031
+data 0x2000009
+data 0x10c
+data 0x200000a
+data 0x10c
+data 0x200000b
+data 0x10c
+data 0x200000c
+data 0x10c
+data 0x2000008
+data 0x208
+data 0x7000830
+data 0x200000c
+data 0x208
+data 0x3070c00
+data 0x200000a
+data 0x210
+data 0x1000000
+data 0x200000
+data 0x200000a
+data 0x211
+data 0x200000a
+data 0x200000b
+data 0x11b
+data 0x2000008
+data 0x40341
+data 0x2000009
+data 0x2000008
+data 0x900fff1
+data 0x30242
+data 0x200000b
+data 0x900ffe1
+data 0x0
+data 0x0
+data 0x49
+data 0x0
+data 0x1f40138
+data 0x2000008
+data 0x30242
+data 0x2000008
+data 0x900fffd
+data 0x49
+data 0x1730338
+data 0x200001c
+data 0x2000009
+data 0x0
+data 0x218
+data 0x81
+data 0x2000009
+data 0x10c
+data 0x700092d
+data 0xa90338
+data 0x200001c
+data 0x1000000
+data 0x5
+data 0x2000008
+data 0x210
+data 0x1000000
+data 0xffffff00
+data 0x2000008
+data 0xa80338
+data 0x200001c
+data 0x2000008
+data 0x1000000
+data 0x5
+data 0x49
+data 0x40242
+data 0xf00402d
+data 0x900006e
+data 0xa80338
+data 0x200001e
+data 0xf00402d
+data 0x29
+data 0x1e10438
+data 0x200001e
+data 0x200001c
+data 0x2000009
+data 0x200000a
+data 0x208
+data 0x200000a
+data 0xf00f12d
+data 0xa90338
+data 0x200001e
+data 0x5
+data 0x200000b
+data 0x70341
+data 0x1000000
+data 0x8
+data 0x200000b
+data 0x900000b
+data 0x20242
+data 0x2000009
+data 0x9000006
+data 0x216
+data 0x1
+data 0x2000009
+data 0x1730338
+data 0x200001e
+data 0x200000a
+data 0x0
+data 0x218
+data 0xbd
+data 0x200000a
+data 0x208
+data 0x7000a2d
+data 0x200000a
+data 0x70341
+data 0x2
+data 0x200000a
+data 0x900000b
+data 0x60341
+data 0x4
+data 0x200000a
+data 0x9000007
+data 0x216
+data 0x1
+data 0x2000009
+data 0x50242
+data 0x2000009
+data 0x9000033
+data 0x1730338
+data 0x200001e
+data 0x200000a
+data 0x0
+data 0x218
+data 0xbd
+data 0x200000a
+data 0x70341
+data 0x1
+data 0x7000a2d
+data 0x9000029
+data 0xb10338
+data 0x200001e
+data 0x2
+data 0x200000a
+data 0xb10338
+data 0x200001e
+data 0x6
+data 0x200000b
+data 0x221
+data 0x2
+data 0x200000b
+data 0x10341
+data 0x200000b
+data 0x200000a
+data 0x900001a
+data 0xb10338
+data 0x200001e
+data 0x6
+data 0x200000b
+data 0x221
+data 0x4
+data 0x200000b
+data 0x50341
+data 0x200000b
+data 0x200000a
+data 0x900000c
+data 0x220
+data 0x3
+data 0x2000009
+data 0x216
+data 0x1
+data 0x2000009
+data 0x140
+data 0x9000005
+data 0x220
+data 0x2
+data 0x2000009
+data 0x50341
+data 0x3b9ac9ff
+data 0x2000009
+data 0x9000007
+data 0x208
+data 0x3b9ac9ff
+data 0x2000009
+data 0x49
+data 0x208
+data 0xffffffff
+data 0x2000009
+data 0x208
+data 0xffffffff
+data 0x200000a
+data 0x49
+data 0x357
+data 0x200001c
+data 0x11
+data 0x0
+data 0x148
+data 0x900ff43
+data 0x49
+data 0x10c
+data 0x200000d
+data 0x208
+data 0x7000d32
+data 0x200001c
+data 0x70341
+data 0x1000000
+data 0x2
+data 0x3071c00
+data 0x900000b
+data 0x357
+data 0x200001c
+data 0x11
+data 0x0
+data 0x148
+data 0x900ff32
+data 0x11b
+data 0x200000d
+data 0x208
+data 0xa
+data 0x200000e
+data 0x40341
+data 0x5000033
+data 0x200000d
+data 0x900ffed
+data 0x49
+data 0x30a
+data 0x2
+data 0x2000008
+data 0x900002d
+data 0x148
+data 0x9000007
+data 0x30a
+data 0x2
+data 0x9000027
+data 0x2000008
+data 0x49
+data 0xa90338
+data 0x2000008
+data 0x5
+data 0x2000009
+data 0x70341
+data 0x1000000
+data 0x4000
+data 0x2000009
+data 0x900000a
+data 0x208
+data 0x9
+data 0x2000009
+data 0x140
+data 0x9000005
+data 0xa70238
+data 0x2000008
+data 0x2000009
+data 0x60341
+data 0x1000000
+data 0x2
+data 0x3070800
+data 0x900000d
+data 0x20c0238
+data 0x2000008
+data 0xa09000e
+data 0x2050338
+data 0x2000008
+data 0xa09001f
+data 0xa09001f
+data 0x49
+data 0x20c0238
+data 0x2000008
+data 0xa090010
+data 0x49
+data 0x0
+data 0x0
+data 0x8
+data 0x9
+data 0xd
+data 0xb
+data 0xa
+data 0x9
+data 0xc
+data 0x8
+data 0xc
+data 0x8
+data 0x8
+data 0x9
+data 0xb
+data 0xb
+data 0x8
+data 0x9
+data 0xc
+data 0x8
+data 0xb
+data 0x7
+data 0x1800
+data 0x1800
+data 0x1000
+data 0xe00
+data 0x1600
+data 0x1300
+data 0xe00
+data 0x2000
+data 0x1300
+data 0x1500
+data 0x208
+data 0x8
+data 0x2000008
+data 0x10341
+data 0x8
+data 0x2000008
+data 0x9000184
+data 0x40242
+data 0x2000008
+data 0x900fff9
+data 0x2580138
+data 0x2000012
+data 0x208
+data 0x200001e
+data 0x31e1200
+data 0x208
+data 0x200001c
+data 0x31c1200
+data 0x208
+data 0x2000008
+data 0x31f1200
+data 0x26a0238
+data 0x2000012
+data 0x9000004
+data 0x49
+data 0x148
+data 0x900010f
+data 0x2590238
+data 0x2000012
+data 0xfff25
+data 0x2210538
+data 0x2000012
+data 0xffffffff
+data 0x2000014
+data 0x2000015
+data 0x2000016
+data 0x2250538
+data 0x2000012
+data 0xffffffff
+data 0x500
+data 0x500
+data 0x500
+data 0x2370838
+data 0x2000012
+data 0x2000012
+data 0x0
+data 0xfffffe00
+data 0xfffffe00
+data 0x0
+data 0x0
+data 0x0
+data 0x2550638
+data 0x2000012
+data 0xffffffff
+data 0xf
+data 0x200000a
+data 0x200000b
+data 0x200000c
+data 0x2570538
+data 0x2000012
+data 0xffffffff
+data 0x0
+data 0x2000
+data 0x0
+data 0x2270538
+data 0x2000012
+data 0xffffffff
+data 0xa1f012c
+data 0xa1f0135
+data 0xa1f013e
+data 0x24c0238
+data 0x2000012
+data 0xf
+data 0x2ea0938
+data 0x2000013
+data 0x2000012
+data 0xfff3e
+data 0x20
+data 0x40
+data 0xc
+data 0x200
+data 0x0
+data 0x37
+data 0x2210538
+data 0x2000013
+data 0xffffffff
+data 0x2000014
+data 0x2000015
+data 0x2000016
+data 0x2250538
+data 0x2000013
+data 0xffffffff
+data 0x400
+data 0x400
+data 0x400
+data 0x2550638
+data 0x2000013
+data 0xffffffff
+data 0xf
+data 0x200000a
+data 0x200000b
+data 0x200000c
+data 0x2570538
+data 0x2000013
+data 0xffffffff
+data 0x0
+data 0x2000
+data 0x0
+data 0x24c0238
+data 0x2000013
+data 0x20
+data 0x2590238
+data 0x2000013
+data 0xfff17
+data 0x2630338
+data 0x2000013
+data 0x2000012
+data 0xffffffff
+data 0x2210538
+data 0x2000013
+data 0xffffffff
+data 0x0
+data 0xfffffc00
+data 0x0
+data 0x2250538
+data 0x2000013
+data 0xffffffff
+data 0x200
+data 0x200
+data 0x200
+data 0x24c0238
+data 0x2000013
+data 0xf
+data 0x2590238
+data 0x2000013
+data 0xfff18
+data 0x2630338
+data 0x2000013
+data 0x2000012
+data 0xffffffff
+data 0x2210538
+data 0x2000013
+data 0xffffffff
+data 0x0
+data 0x400
+data 0x0
+data 0x2250538
+data 0x2000013
+data 0xffffffff
+data 0x200
+data 0x200
+data 0x200
+data 0x24c0238
+data 0x2000013
+data 0xf
+data 0x2590238
+data 0x2000013
+data 0xfff17
+data 0x2630338
+data 0x2000013
+data 0x2000012
+data 0xffffffff
+data 0x2210538
+data 0x2000013
+data 0xffffffff
+data 0x0
+data 0x0
+data 0xfffffc00
+data 0x2250538
+data 0x2000013
+data 0xffffffff
+data 0x200
+data 0x200
+data 0x200
+data 0x24c0238
+data 0x2000013
+data 0xf
+data 0x2590238
+data 0x2000013
+data 0xfff18
+data 0x2630338
+data 0x2000013
+data 0x2000012
+data 0xffffffff
+data 0x2210538
+data 0x2000013
+data 0xffffffff
+data 0x0
+data 0x0
+data 0x400
+data 0x2250538
+data 0x2000013
+data 0xffffffff
+data 0x200
+data 0x200
+data 0x200
+data 0x24c0238
+data 0x2000013
+data 0xf
+data 0x208
+data 0xf
+data 0x2000017
+data 0x102
+data 0x2000017
+data 0x2ea0938
+data 0x2000013
+data 0x2000012
+data 0xfff17
+data 0x4
+data 0x200
+data 0x2
+data 0x200
+data 0xc7f00
+data 0x27
+data 0x2210538
+data 0x2000013
+data 0xffffffff
+data 0x200000a
+data 0x200000b
+data 0x200000c
+data 0x2250538
+data 0x2000013
+data 0xffffffff
+data 0x200
+data 0x200
+data 0x200
+data 0x24c0238
+data 0x2000013
+data 0x14
+data 0x2ea0938
+data 0x2000013
+data 0x2000012
+data 0xfff18
+data 0x4
+data 0x200
+data 0x2
+data 0x200
+data 0xc7f00
+data 0x27
+data 0x2210538
+data 0x2000013
+data 0xffffffff
+data 0x200000a
+data 0x200000b
+data 0x200000c
+data 0x2250538
+data 0x2000013
+data 0xffffffff
+data 0x200
+data 0x200
+data 0x200
+data 0x24c0238
+data 0x2000013
+data 0x14
+data 0x2ea0938
+data 0x2000013
+data 0x2000012
+data 0xfff25
+data 0x10
+data 0x200
+data 0x2
+data 0x200
+data 0x1000000
+data 0x40c7f00
+data 0x27
+data 0x2210538
+data 0x2000013
+data 0xffffffff
+data 0x200000a
+data 0x200000b
+data 0x200000c
+data 0x2250538
+data 0x2000013
+data 0xffffffff
+data 0x300
+data 0x300
+data 0x300
+data 0x2270538
+data 0x2000013
+data 0xffffffff
+data 0xa1f0057
+data 0xa1f0060
+data 0xa1f0069
+data 0x2290338
+data 0x2000013
+data 0x0
+data 0x1
+data 0x24c0238
+data 0x2000013
+data 0x14
+data 0x208
+data 0x14
+data 0x2000017
+data 0x102
+data 0x2000017
+data 0x50
+data 0x242
+data 0x200001c
+data 0x900003d
+data 0x208
+data 0x5000023
+data 0x2000017
+data 0x10c
+data 0x2000008
+data 0x10c
+data 0x200000a
+data 0x10c
+data 0x200000b
+data 0x10c
+data 0x200000c
+data 0x208
+data 0x7000822
+data 0x2000009
+data 0x810438
+data 0x2000009
+data 0x2000014
+data 0x2000015
+data 0x2000016
+data 0x218
+data 0x2000014
+data 0x200000a
+data 0x218
+data 0x2000015
+data 0x200000b
+data 0x218
+data 0x2000016
+data 0x200000c
+data 0x11b
+data 0x2000008
+data 0x40341
+data 0x2000017
+data 0x2000008
+data 0x900ffed
+data 0x221
+data 0x2000017
+data 0x200000a
+data 0x221
+data 0x2000017
+data 0x200000b
+data 0x221
+data 0x2000017
+data 0x200000c
+data 0x219
+data 0x600
+data 0x200000b
+data 0x219
+data 0x200
+data 0x200000b
+data 0x810438
+data 0x200001e
+data 0x2000014
+data 0x2000015
+data 0x2000016
+data 0x219
+data 0x400
+data 0x2000015
+data 0x49
+data 0x810438
+data 0x200001c
+data 0x200000a
+data 0x200000b
+data 0x200000c
+data 0x140
+data 0x900ffef
+data 0xff
+data 0x51
+data 0x55
+data 0xd8
+data 0xe7
+data 0xe8
+data 0x10
+data 0x0
+data 0xf5
+data 0x20
+data 0xa6
+data 0xc8
+data 0xd4
+data 0xe7
+data 0xe0
+data 0x10
+data 0x0
+data 0xff
+data 0x0
+data 0xe8
+data 0x83
+data 0x88
+data 0x78
+data 0x88
+data 0xd8
+data 0x0
+data 0xd7
+data 0x49
+data 0xa90338
+data 0x200001c
+data 0x40
+data 0x2000018
+data 0xa90338
+data 0x200001c
+data 0x41
+data 0x2000019
+data 0x220
+data 0x64
+data 0x2000018
+data 0x220
+data 0x64
+data 0x2000019
+data 0x11d
+data 0x2000019
+data 0x10c
+data 0x200001a
+data 0x810438
+data 0x200001c
+data 0x200000e
+data 0x200000f
+data 0x2000010
+data 0x218
+data 0x200000e
+data 0x2000018
+data 0x218
+data 0x200000f
+data 0x2000019
+data 0x218
+data 0x2000010
+data 0x200001a
+data 0x49
+data 0x1730338
+data 0x200001c
+data 0x2000008
+data 0x0
+data 0x208
+data 0x200001e
+data 0x10040880
+data 0x49
+data 0x40242
+data 0xf00e02d
+data 0x9000016
+data 0xa90338
+data 0x2000000
+data 0x5
+data 0x2000008
+data 0x70341
+data 0x1000000
+data 0x10
+data 0x2000008
+data 0x900000f
+data 0x1730338
+data 0x2000000
+data 0x2000008
+data 0x0
+data 0x218
+data 0x81
+data 0x2000008
+data 0x211
+data 0xf00
+data 0x700082d
+data 0x49
+data 0x148
+data 0x900fd11
+data 0x10c
+data 0x2000009
+data 0x208
+data 0x7000922
+data 0x200001c
+data 0x1730338
+data 0x200001c
+data 0x2000008
+data 0x0
+data 0x70341
+data 0x400
+data 0x10070880
+data 0x9000008
+data 0x357
+data 0x200001c
+data 0x4
+data 0x0
+data 0x11b
+data 0x2000009
+data 0x10341
+data 0x2000009
+data 0x5000023
+data 0x900ffef
+data 0x148
+data 0x900fcf8
+data 0x49
+data 0x0
+data 0x60341
+data 0x4
+data 0xf00f52d
+data 0x900ffff
+data 0x49
+data 0xa90338
+data 0x200001c
+data 0x8
+data 0x2000008
+data 0x210
+data 0x80
+data 0x2000008
+data 0x49
+data 0x3560238
+data 0x0
+data 0x2000008
+data 0x20242
+data 0x2000008
+data 0x9000007
+data 0x208
+data 0xf00682d
+data 0x2000008
+data 0x49
+data 0x208
+data 0xffffffff
+data 0x2000008
+data 0x49
+data 0x208
+data 0x1
+data 0x2000011
+data 0x10c
+data 0x2000014
+data 0x140
+data 0x9000009
+
+; FORK JMP
+LABEL_3:
+mov 0x1, stor[17] ; source, dest
+mov 0x0, stor[19] ; source, dest
+mov 0x0, stor[20] ; source, dest
+LABEL_4:
+jmp_cmp ==, 0x0, stor[14], inl[:LABEL_9] ; operand, left, right, addr
+mul 0xffffffff, stor[17] ; amount, operand
+jmp_cmp ==, 0x1, stor[17], inl[:LABEL_5] ; operand, left, right, addr
+call Battle::scriptRenderButtonPressHudElement, 0x24, 0x50, 0x2a, 0x1, 0x80 ; type, x, y, translucency, brightness
+call Battle::scriptRenderButtonPressHudElement, 0x23, 0x4c, 0x32, 0x1, 0x80 ; type, x, y, translucency, brightness
+jmp inl[:LABEL_6] ; addr
+LABEL_5:
+call Battle::scriptRenderButtonPressHudElement, 0x24, 0x50, 0x2e, 0x1, 0x80 ; type, x, y, translucency, brightness
+call Battle::scriptRenderButtonPressHudElement, 0x21, 0x4c, 0x32, 0x1, 0x80 ; type, x, y, translucency, brightness
+LABEL_6:
+jmp_cmp &, 0x20, var[4], inl[:LABEL_10] ; operand, left, right, addr
+mov 0x0, stor[11] ; source, dest
+LABEL_7:
+jmp_cmp >=, 0x0, stor[20], inl[:LABEL_8] ; operand, left, right, addr
+decr stor[20] ; operand
+LABEL_8:
+gosub inl[:LABEL_13] ; addr
+LABEL_9:
+yield
+jmp inl[:LABEL_4] ; addr
+LABEL_10:
+incr stor[9] ; operand
+incr stor[10] ; operand
+jmp_cmp >=, 0x0, stor[20], inl[:LABEL_11] ; operand, left, right, addr
+mov 0x0, stor[11] ; source, dest
+jmp inl[:LABEL_12] ; addr
+LABEL_11:
+mov 0x1, stor[11] ; source, dest
+mov stor[19], stor[20] ; source, dest
+LABEL_12:
+add stor[12], stor[8] ; amount, operand
+jmp inl[:LABEL_7] ; addr
+
+; SUBROUTINE
+LABEL_13:
+mov stor[8], stor[25] ; source, dest
+mov stor[25], stor[24] ; source, dest
+mod 0xa, stor[24] ; amount, operand
+sub stor[24], stor[25] ; amount, operand
+add 0x3, stor[24] ; amount, operand
+call Battle::scriptRenderButtonPressHudElement, stor[24], 0x78, 0x32, 0x1, 0x80 ; type, x, y, translucency, brightness
+mov stor[25], stor[24] ; source, dest
+mod 0x64, stor[24] ; amount, operand
+sub stor[24], stor[25] ; amount, operand
+div 0xa, stor[24] ; amount, operand
+add 0x3, stor[24] ; amount, operand
+call Battle::scriptRenderButtonPressHudElement, stor[24], 0x70, 0x32, 0x1, 0x80 ; type, x, y, translucency, brightness
+mov stor[25], stor[24] ; source, dest
+mod 0x3e8, stor[24] ; amount, operand
+div 0x64, stor[24] ; amount, operand
+add 0x3, stor[24] ; amount, operand
+call Battle::scriptRenderButtonPressHudElement, stor[24], 0x68, 0x32, 0x1, 0x80 ; type, x, y, translucency, brightness
+call Battle::scriptRenderButtonPressHudElement, 0xd, 0x80, 0x32, 0x1, 0x80 ; type, x, y, translucency, brightness
+call Battle::scriptRenderButtonPressHudElement, 0x20, 0x68, 0x36, 0x1, 0x80 ; type, x, y, translucency, brightness
+call Battle::scriptRenderButtonPressHudElement, 0x1e, 0x64, 0x36, 0x1, 0x80 ; type, x, y, translucency, brightness
+call Battle::scriptRenderButtonPressHudElement, 0x1c, 0x68, 0x32, 0x1, 0x80 ; type, x, y, translucency, brightness
+call Battle::scriptRenderButtonPressHudElement, 0x18, 0x64, 0x32, 0x1, 0x80 ; type, x, y, translucency, brightness
+call Battle::scriptRenderButtonPressHudElement, 0x1a, 0x64, 0x3e, 0x1, 0x80 ; type, x, y, translucency, brightness
+call Battle::scriptRenderButtonPressHudElement, 0x1d, 0x68, 0x3e, 0x1, 0x80 ; type, x, y, translucency, brightness
+call Battle::scriptRenderButtonPressHudElement, 0x20, 0x70, 0x36, 0x1, 0x80 ; type, x, y, translucency, brightness
+call Battle::scriptRenderButtonPressHudElement, 0x1d, 0x70, 0x3e, 0x1, 0x80 ; type, x, y, translucency, brightness
+call Battle::scriptRenderButtonPressHudElement, 0x1c, 0x70, 0x32, 0x1, 0x80 ; type, x, y, translucency, brightness
+call Battle::scriptRenderButtonPressHudElement, 0x20, 0x78, 0x36, 0x1, 0x80 ; type, x, y, translucency, brightness
+call Battle::scriptRenderButtonPressHudElement, 0x1d, 0x78, 0x3e, 0x1, 0x80 ; type, x, y, translucency, brightness
+call Battle::scriptRenderButtonPressHudElement, 0x1c, 0x78, 0x32, 0x1, 0x80 ; type, x, y, translucency, brightness
+call Battle::scriptRenderButtonPressHudElement, 0x20, 0x80, 0x36, 0x1, 0x80 ; type, x, y, translucency, brightness
+call Battle::scriptRenderButtonPressHudElement, 0x1d, 0x80, 0x3e, 0x1, 0x80 ; type, x, y, translucency, brightness
+call Battle::scriptRenderButtonPressHudElement, 0x1c, 0x80, 0x32, 0x1, 0x80 ; type, x, y, translucency, brightness
+call Battle::scriptRenderButtonPressHudElement, 0x1f, 0x8c, 0x36, 0x1, 0x80 ; type, x, y, translucency, brightness
+call Battle::scriptRenderButtonPressHudElement, 0x19, 0x8c, 0x32, 0x1, 0x80 ; type, x, y, translucency, brightness
+call Battle::scriptRenderButtonPressHudElement, 0x1b, 0x8c, 0x3e, 0x1, 0x80 ; type, x, y, translucency, brightness
+return
+
+; SUBROUTINE
+LABEL_14:
+gosub inl[:LABEL_23] ; addr
+mov var[35], stor[26] ; source, dest
+decr stor[26] ; operand
+LABEL_15:
+mov var[34][stor[26]], stor[27] ; source, dest
+jmp_cmp ==, stor[30], stor[27], inl[:LABEL_16] ; operand, left, right, addr
+decr stor[26] ; operand
+jmp_cmp <=, 0x0, stor[26], inl[:LABEL_15] ; operand, left, right, addr
+mov 0x1, stor[8] ; source, dest
+jmp inl[:LABEL_17] ; addr
+LABEL_16:
+mov 0x0, stor[8] ; source, dest
+LABEL_17:
+return
+
+; SUBROUTINE
+LABEL_18:
+gosub inl[:LABEL_23] ; addr
+jmp_cmp ==, 0xffffffff, stor[28], inl[:LABEL_20] ; operand, left, right, addr
+jmp_cmp ==, 0xfffffffe, stor[28], inl[:LABEL_21] ; operand, left, right, addr
+mov var[35], stor[26] ; source, dest
+decr stor[26] ; operand
+LABEL_19:
+mov var[34][stor[26]], stor[27] ; source, dest
+jmp_cmp ==, stor[28], stor[27], inl[:LABEL_21] ; operand, left, right, addr
+decr stor[26] ; operand
+jmp_cmp <=, 0x0, stor[26], inl[:LABEL_19] ; operand, left, right, addr
+LABEL_20:
+mov 0x1, stor[8] ; source, dest
+jmp inl[:LABEL_22] ; addr
+LABEL_21:
+mov 0x0, stor[8] ; source, dest
+LABEL_22:
+return
+data 0x148
+data 0x900ffda
+data 0x20242
+data 0x2000008
+data 0x900000b
+data 0x231
+data 0x5000035
+data 0x200001b
+data 0x208
+data 0x7001b34
+data 0x2000008
+data 0x140
+data 0x9000008
+data 0x231
+data 0x5000033
+data 0x200001b
+data 0x208
+data 0x7001b32
+data 0x2000008
+data 0x49
+
+; SUBROUTINE
+LABEL_23:
+call Battle::FUN_800e74ac, stor[30], stor[28] ; bentIndex, p1
+return
+
+; SUBROUTINE
+LABEL_24:
+mov var[45][202], stor[8] ; source, dest
+jmp_cmp <=, 0x0, stor[8], inl[:LABEL_25] ; operand, left, right, addr
+mov 0x5, stor[8] ; source, dest
+LABEL_25:
+jmp_cmp >=, 0x9, stor[8], inl[:LABEL_26] ; operand, left, right, addr
+mov 0x5, stor[8] ; source, dest
+LABEL_26:
+return
+
+; SUBROUTINE
+LABEL_27:
+mov var[45][147], stor[8] ; source, dest
+jmp_cmp <=, 0x0, stor[8], inl[:LABEL_28] ; operand, left, right, addr
+mov 0x64, stor[8] ; source, dest
+LABEL_28:
+jmp_cmp >=, 0x3e8, stor[8], inl[:LABEL_29] ; operand, left, right, addr
+mov 0x64, stor[8] ; source, dest
+LABEL_29:
+return
+
+; SUBROUTINE
+LABEL_30:
+mov stor[8], stor[10] ; source, dest
+gosub inl[:LABEL_18] ; addr
+jmp_cmp ==, 0x0, stor[8], inl[:LABEL_31] ; operand, left, right, addr
+call Battle::scriptGetBentStat, stor[28], MONSTER_DAMAGE_REDUCTION, stor[26] ; bentIndex, statIndex, value
+jmp_cmp !&, 0x1, stor[26], inl[:LABEL_31] ; operand, left, right, addr
+mov 0x64, stor[13] ; source, dest
+LABEL_31:
+mov stor[10], stor[8] ; source, dest
+gosub inl[:LABEL_23] ; addr
+gosub inl[:LABEL_34] ; addr
+gosub inl[:LABEL_0] ; addr
+mul stor[13], stor[8] ; amount, operand
+div 0x64, stor[8] ; amount, operand
+jmp_cmp >=, 0x3b9ac9ff, stor[8], inl[:LABEL_32] ; operand, left, right, addr
+mov 0x3b9ac9ff, stor[8] ; source, dest
+LABEL_32:
+jmp_cmp <=, 0xffffffff, stor[8], inl[:LABEL_33] ; operand, left, right, addr
+mov 0xffffffff, stor[8] ; source, dest
+LABEL_33:
+fork_reenter stor[28], 0x2, stor[8] ; index, entrypoint, stor[32] value
+return
+data 0x148
+data 0x9000085
+data 0x208
+data 0x2000008
+data 0x200001b
+data 0x148
+data 0x900ff9b
+data 0x20341
+data 0x1000000
+data 0xffffffff
+data 0x200001c
+data 0x9000038
+data 0x208
+data 0x5000033
+data 0x200001a
+data 0x11c
+data 0x200001a
+data 0x208
+data 0x7001a32
+data 0x200001c
+data 0x60341
+data 0x3071c00
+data 0x1000000
+data 0x4000
+data 0x9000024
+data 0x208
+data 0x200001b
+data 0x2000008
+data 0x148
+data 0x900f9db
+data 0x220
+data 0x200000d
+data 0x2000008
+data 0x221
+data 0x64
+data 0x2000008
+data 0x50341
+data 0x3b9ac9ff
+data 0x2000008
+data 0x9000007
+data 0x208
+data 0x3b9ac9ff
+data 0x2000008
+data 0x341
+data 0x1000000
+data 0xffffffff
+data 0x2000008
+data 0x9000009
+data 0x208
+data 0x1000000
+data 0xffffffff
+data 0x2000008
+data 0x357
+data 0x200001c
+data 0x2
+data 0x2000008
+data 0x11c
+data 0x200001a
+data 0x242
+data 0x200001a
+data 0x900ffd7
+data 0x140
+data 0x9000045
+data 0x208
+data 0x5000035
+data 0x200001a
+data 0x11c
+data 0x200001a
+data 0x208
+data 0x7001a34
+data 0x200001c
+data 0x60341
+data 0x3071c00
+data 0x1000000
+data 0x4000
+data 0x9000036
+data 0x208
+data 0x200001b
+data 0x2000008
+data 0x148
+data 0x900f9a8
+data 0x208
+data 0x200000d
+data 0x200000a
+data 0xa90338
+data 0x200001c
+data 0x35
+data 0x2000009
+data 0x70341
+data 0x1000000
+data 0x1
+data 0x2000009
+data 0x9000008
+data 0x208
+data 0x64
+data 0x200000d
+data 0x220
+data 0x200000d
+data 0x2000008
+data 0x208
+data 0x200000a
+data 0x200000d
+data 0x221
+data 0x64
+data 0x2000008
+data 0x50341
+data 0x3b9ac9ff
+data 0x2000008
+data 0x9000007
+data 0x208
+data 0x3b9ac9ff
+data 0x2000008
+data 0x341
+data 0x1000000
+data 0xffffffff
+data 0x2000008
+data 0x9000009
+data 0x208
+data 0x1000000
+data 0xffffffff
+data 0x2000008
+data 0x357
+data 0x200001c
+data 0x2
+data 0x2000008
+data 0x11c
+data 0x200001a
+data 0x242
+data 0x200001a
+data 0x900ffc5
+data 0x148
+data 0x900ff1e
+data 0x49
+
+; SUBROUTINE
+LABEL_34:
+sub 0xc0, stor[8] ; amount, operand
+return
+
+; SUBROUTINE
+LABEL_35:
+gosub inl[:LABEL_18] ; addr
+jmp_cmp ==, 0x1, stor[8], inl[:LABEL_36] ; operand, left, right, addr
+mov 0xfffffd80, stor[8] ; source, dest
+jmp inl[:LABEL_37] ; addr
+LABEL_36:
+call Battle::scriptGetBentStat, stor[28], MIDDLE_OFFSET_Y, stor[8] ; bentIndex, statIndex, value
+mul 0x64, stor[8] ; amount, operand
+add 0xffffff00, stor[8] ; amount, operand
+neg stor[8] ; operand
+jmp_cmp >=, 0xfffffe00, stor[8], inl[:LABEL_37] ; operand, left, right, addr
+mov 0xfffffe00, stor[8] ; source, dest
+LABEL_37:
+return
+
+; SUBROUTINE
+LABEL_38:
+gosub inl[:LABEL_18] ; addr
+jmp_cmp ==, 0x1, stor[8], inl[:LABEL_39] ; operand, left, right, addr
+mov 0x0, stor[8] ; source, dest
+jmp inl[:LABEL_40] ; addr
+LABEL_39:
+call Battle::scriptGetBentStat, stor[28], MIDDLE_OFFSET_X, stor[8] ; bentIndex, statIndex, value
+mul 0xffffff9c, stor[8] ; amount, operand
+LABEL_40:
+return
+data 0x208
+data 0x1000000
+data 0xfffffd80
+data 0x2000008
+data 0x140
+data 0x9000018
+data 0xa90338
+data 0x200001c
+data 0x41
+data 0x2000008
+data 0x220
+data 0x64
+data 0x2000008
+data 0x218
+data 0x1000000
+data 0xffffff00
+data 0x2000008
+data 0x11d
+data 0x2000008
+data 0x50341
+data 0x1000000
+data 0xfffffe00
+data 0x2000008
+data 0x9000009
+data 0x208
+data 0x1000000
+data 0xfffffe00
+data 0x2000008
+data 0x49
+data 0x208
+data 0x0
+data 0x2000008
+data 0x140
+data 0x9000009
+data 0xa90338
+data 0x200001c
+data 0x40
+data 0x2000008
+data 0x220
+data 0x64
+data 0x2000008
+data 0x49
+
+; SUBROUTINE
+LABEL_41:
+call Scus94491BpeSegment::scriptLoadMonsterAttackSounds, stor[8] ; monsterIndex
+LABEL_42:
+call Scus94491BpeSegment::scriptGetLoadedSoundFiles, stor[26] ; flags
+yield
+jmp_cmp &, 0x20, stor[26], inl[:LABEL_42] ; operand, left, right, addr
+return
+
+; SUBROUTINE
+LABEL_43:
+decr stor[8] ; operand
+call Scus94491BpeSegment::scriptStopSound, 0xa, stor[8], 0x3 ; soundFileIndex, soundIndex, mode
+incr stor[8] ; operand
+while stor[8], inl[:LABEL_43] ; counter, addr
+call Scus94491BpeSegment::scriptUnloadSoundFile, 0x6 ; soundType
+return
+data 0x34b0338
+data 0x3160a00
+data 0x0
+data 0x2
+data 0x24c0238
+data 0x3160a00
+data 0x5
+data 0x148
+data 0x9000042
+data 0x208
+data 0x60
+data 0x500002c
+data 0x148
+data 0x900fe92
+data 0x208
+data 0x200001e
+data 0x5000050
+data 0x208
+data 0x200001c
+data 0x5000051
+data 0x49
+
+; SUBROUTINE
+LABEL_44:
+call SEffe::scriptAllocateScreenDistortionEffect, stor[stor[stor[0], 10], 22], 0x0, 0x2 ; effectIndex, angleStep, type
+call SEffe::scriptAddLifespanAttachment, stor[stor[stor[0], 10], 22], 0x5 ; effectIndex, ticks
+gosub inl[:LABEL_49] ; addr
+gosub inl[:LABEL_18] ; addr
+jmp_cmp ==, 0x0, stor[8], inl[:LABEL_45] ; operand, left, right, addr
+mov 0x6a, var[44] ; source, dest
+jmp inl[:LABEL_46] ; addr
+LABEL_45:
+mov 0x60, var[44] ; source, dest
+LABEL_46:
+gosub inl[:LABEL_23] ; addr
+mov stor[30], var[80] ; source, dest
+mov stor[28], var[81] ; source, dest
+return
+
+; SUBROUTINE
+LABEL_47:
+incr var[89] ; operand
+return
+
+; SUBROUTINE
+LABEL_48:
+call SEffe::scriptAllocateScreenDistortionEffect, stor[22], 0x0, 0x2 ; effectIndex, angleStep, type
+call SEffe::scriptAddLifespanAttachment, stor[22], 0x5 ; effectIndex, ticks
+yield
+mov 0xe3, var[44] ; source, dest
+yield
+yield
+gosub inl[:LABEL_55] ; addr
+yield
+yield
+return
+
+; SUBROUTINE
+LABEL_49:
+gosub inl[:LABEL_14] ; addr
+jmp_cmp ==, 0x0, stor[8], inl[:LABEL_52] ; operand, left, right, addr
+mov var[53], stor[26] ; source, dest
+decr stor[26] ; operand
+LABEL_50:
+mov var[52][stor[26]], stor[27] ; source, dest
+call Battle::FUN_800cb618, stor[27], 0x0 ; bentIndex, set
+decr stor[26] ; operand
+jmp_cmp <=, 0x0, stor[26], inl[:LABEL_50] ; operand, left, right, addr
+jmp_cmp !=, 0xf, var[97], inl[:LABEL_51] ; operand, left, right, addr
+call Battle::scriptShowStageModelPart, 0x2 ; modelPartIndex
+LABEL_51:
+jmp inl[:LABEL_54] ; addr
+LABEL_52:
+mov var[35], stor[26] ; source, dest
+decr stor[26] ; operand
+LABEL_53:
+mov var[34][stor[26]], stor[27] ; source, dest
+call Battle::FUN_800cb618, stor[27], 0x0 ; bentIndex, set
+decr stor[26] ; operand
+jmp_cmp <=, 0x0, stor[26], inl[:LABEL_53] ; operand, left, right, addr
+LABEL_54:
+gosub inl[:LABEL_23] ; addr
+return
+
+; SUBROUTINE
+LABEL_55:
+gosub inl[:LABEL_14] ; addr
+jmp_cmp ==, 0x0, stor[8], inl[:LABEL_58] ; operand, left, right, addr
+mov var[53], stor[26] ; source, dest
+decr stor[26] ; operand
+LABEL_56:
+mov var[52][stor[26]], stor[27] ; source, dest
+call Battle::FUN_800cb618, stor[27], 0x1 ; bentIndex, set
+decr stor[26] ; operand
+jmp_cmp <=, 0x0, stor[26], inl[:LABEL_56] ; operand, left, right, addr
+jmp_cmp !=, 0xf, var[97], inl[:LABEL_57] ; operand, left, right, addr
+call Battle::scriptHideStageModelPart, 0x2 ; modelPartIndex
+LABEL_57:
+jmp inl[:LABEL_60] ; addr
+LABEL_58:
+mov var[35], stor[26] ; source, dest
+decr stor[26] ; operand
+LABEL_59:
+mov var[34][stor[26]], stor[27] ; source, dest
+call Battle::FUN_800cb618, stor[27], 0x1 ; bentIndex, set
+decr stor[26] ; operand
+jmp_cmp <=, 0x0, stor[26], inl[:LABEL_59] ; operand, left, right, addr
+LABEL_60:
+gosub inl[:LABEL_23] ; addr
+return
+LABEL_61:
+data 0x7
+data 0x9
+data 0xb
+data 0xa00
+data 0xfffff100
+ENTRYPOINT_0:
+gosub inl[:LABEL_14] ; addr
+jmp_cmp ==, 0x0, stor[8], inl[:LABEL_62] ; operand, left, right, addr
+gosub inl[:LABEL_24] ; addr
+mov inl[:LABEL_96[stor[8]]], stor[11] ; source, dest
+mov inl[:LABEL_97[stor[8]]], stor[29] ; source, dest
+mov inl[:LABEL_98[stor[8]]], stor[31] ; source, dest
+gosub inl[:LABEL_27] ; addr
+mov stor[8], stor[13] ; source, dest
+mov 0x0, stor[14] ; source, dest
+mov 0x0, stor[12] ; source, dest
+jmp inl[:LABEL_63] ; addr
+LABEL_62:
+mov 0x0, stor[11] ; source, dest
+mov 0x3, stor[29] ; source, dest
+mov 0x15, stor[31] ; source, dest
+mov 0x64, stor[13] ; source, dest
+mov 0x1, stor[14] ; source, dest
+mov 0x0, stor[12] ; source, dest
+LABEL_63:
+mov 0x4, var[25] ; source, dest
+call Battle::scriptAllocateEmptyEffectManagerChild, stor[9] ; effectIndex
+call Battle::scriptAllocateEmptyEffectManagerChild, stor[10] ; effectIndex
+mov stor[13], stor[stor[stor[0], 9], 8] ; source, dest
+mov 0x0, stor[stor[stor[0], 9], 9] ; source, dest
+mov 0x0, stor[stor[stor[0], 9], 11] ; source, dest
+mov stor[14], stor[stor[stor[0], 9], 14] ; source, dest
+mov 0xa, stor[8] ; source, dest
+gosub inl[:LABEL_41] ; addr
+gosub inl[:LABEL_44] ; addr
+gosub inl[:LABEL_38] ; addr
+mov stor[8], stor[stor[stor[0], 10], 8] ; source, dest
+gosub inl[:LABEL_35] ; addr
+gosub inl[:LABEL_23] ; addr
+call SEffe::allocateDeffTmd, stor[15], 0x31a03 ; effectIndex, flags
+call SEffe::scriptSetRelativePosition, stor[15], stor[28], 0x0, stor[8], stor[stor[stor[0], 10], 8] ; bobjIndex1, bobjIndex2, x, y, z
+mov 0x0, stor[stor[stor[0], 15], 11] ; source, dest
+call SEffe::scriptLoadSameScriptAndJump, stor[15], inl[:LABEL_88] ; scriptIndex, address
+call Scus94491BpeSegment::scriptPlaySound, 0xa, 0x0, 0x0, 0x0, 0x0, 0x0 ; soundFileIndex, soundIndex, unused1, unused2, initialDelay, repeatDelay
+call Battle::scriptAllocateEmptyEffectManagerChild, stor[16] ; effectIndex
+call SEffe::scriptSetRelativePosition, stor[16], stor[15], 0x0, 0x0, 0x0 ; bobjIndex1, bobjIndex2, x, y, z
+mov stor[15], stor[stor[stor[0], 16], 28] ; source, dest
+call SEffe::scriptLoadSameScriptAndJump, stor[16], inl[:LABEL_78] ; scriptIndex, address
+call Scus94491BpeSegment::scriptStartRumbleMode, 0x0, 0x1 ; joypadIndex, p1
+call Scus94491BpeSegment::scriptStartRumble, 0x0, 0x32, 0x1 ; joypadIndex, p1, duration
+mov 0x14, stor[23] ; source, dest
+wait stor[23] ; frames
+mov 0x1, stor[stor[stor[0], 15], 11] ; source, dest
+call SEffe::scriptLoadSameScriptAndJump, stor[9], inl[:LABEL_3] ; scriptIndex, address
+LABEL_64:
+mov 0x0, stor[12] ; source, dest
+mov 0x2, stor[stor[stor[0], 9], 12] ; source, dest
+jmp_cmp !=, 0x0, stor[11], inl[:LABEL_65] ; operand, left, right, addr
+jmp inl[:LABEL_68] ; addr
+LABEL_65:
+jmp_cmp !=, 0x1, stor[11], inl[:LABEL_66] ; operand, left, right, addr
+call Scus94491BpeSegment::scriptPlaySound, 0xa, 0x1, 0x0, 0x0, 0x0, 0x0 ; soundFileIndex, soundIndex, unused1, unused2, initialDelay, repeatDelay
+jmp inl[:LABEL_68] ; addr
+LABEL_66:
+jmp_cmp !=, 0x2, stor[11], inl[:LABEL_67] ; operand, left, right, addr
+call Scus94491BpeSegment::scriptPlaySound, 0xa, 0x1, 0x0, 0x0, 0x0, 0x0 ; soundFileIndex, soundIndex, unused1, unused2, initialDelay, repeatDelay
+jmp inl[:LABEL_68] ; addr
+LABEL_67:
+call Scus94491BpeSegment::scriptPlaySound, 0xa, 0x2, 0x0, 0x0, 0x0, 0x0 ; soundFileIndex, soundIndex, unused1, unused2, initialDelay, repeatDelay
+LABEL_68:
+call Scus94491BpeSegment::scriptStartRumbleMode, 0x0, 0x2 ; joypadIndex, p1
+mov stor[11], stor[25] ; source, dest
+mul 0x10, stor[25] ; amount, operand
+add 0x32, stor[25] ; amount, operand
+call Scus94491BpeSegment::scriptStartRumble, 0x0, stor[25], 0xa ; joypadIndex, p1, duration
+mov 0x0, stor[24] ; source, dest
+mov stor[31], stor[23] ; source, dest
+LABEL_69:
+rand 0xf, stor[13] ; bound, dest
+jmp_cmp !=, 0x0, stor[13], inl[:LABEL_70] ; operand, left, right, addr
+LABEL_70:
+rand 0x2, stor[13] ; bound, dest
+jmp_cmp !=, 0x0, stor[13], inl[:LABEL_71] ; operand, left, right, addr
+LABEL_71:
+jmp_cmp ==, 0x0, stor[stor[stor[0], 9], 14], inl[:LABEL_73] ; operand, left, right, addr
+jmp_cmp ==, 0x0, stor[stor[stor[0], 9], 11], inl[:LABEL_72] ; operand, left, right, addr
+mov 0x1, stor[stor[stor[0], 16], 11] ; source, dest
+jmp inl[:LABEL_74] ; addr
+LABEL_72:
+jmp inl[:LABEL_74] ; addr
+LABEL_73:
+jmp_cmp <, 0x0, stor[24], inl[:LABEL_74] ; operand, left, right, addr
+rand 0x2, stor[24] ; bound, dest
+add 0x1, stor[24] ; amount, operand
+mov 0x1, stor[stor[stor[0], 16], 11] ; source, dest
+LABEL_74:
+jmp_cmp >=, 0x0, stor[24], inl[:LABEL_75] ; operand, left, right, addr
+decr stor[24] ; operand
+LABEL_75:
+yield
+while stor[23], inl[:LABEL_69] ; counter, addr
+jmp_cmp ==, stor[29], stor[11], inl[:LABEL_77] ; operand, left, right, addr
+jmp_cmp ==, 0x3, stor[11], inl[:LABEL_77] ; operand, left, right, addr
+jmp_cmp ==, 0x0, stor[stor[stor[0], 9], 14], inl[:LABEL_76] ; operand, left, right, addr
+jmp_cmp >, inl[:LABEL_61[stor[11]]], stor[stor[stor[0], 9], 9], inl[:LABEL_77] ; operand, left, right, addr
+LABEL_76:
+mov 0x0, stor[stor[stor[0], 9], 9] ; source, dest
+incr stor[11] ; operand
+gosub inl[:LABEL_47] ; addr
+jmp inl[:LABEL_64] ; addr
+LABEL_77:
+mov stor[stor[stor[0], 9], 8], stor[13] ; source, dest
+deallocate_other stor[9] ; index
+mov 0x3, var[25] ; source, dest
+call Scus94491BpeSegment::scriptStartRumble, 0x0, 0x32, 0x1 ; joypadIndex, p1, duration
+mov 0x1, stor[stor[stor[0], 16], 13] ; source, dest
+mov 0x1, stor[stor[stor[0], 15], 15] ; source, dest
+call Scus94491BpeSegment::scriptPlaySound, 0xa, 0x5, 0x0, 0x0, 0x0, 0x0 ; soundFileIndex, soundIndex, unused1, unused2, initialDelay, repeatDelay
+deallocate_other stor[16] ; index
+gosub inl[:LABEL_38] ; addr
+mov stor[8], stor[stor[stor[0], 10], 8] ; source, dest
+gosub inl[:LABEL_35] ; addr
+call SEffe::scriptAllocateParticleEffect, stor[18], stor[28], 0xfff03, 0xa, 0x7f, 0x19, 0xa0, 0x4207f00, 0x29 ; effectIndex, parentIndex, type, count, p4, p5, p6, p7, type2
+call SEffe::scriptSetEffectTranslucencyModeFlag, stor[18], 0x2 ; effectIndex, set
+call SEffe::scriptSetRelativePosition, stor[18], stor[28], 0x0, stor[8], stor[stor[stor[0], 10], 8] ; bobjIndex1, bobjIndex2, x, y, z
+call SEffe::scriptSetRelativeScale, stor[18], 0xffffffff, 0x500, 0x500, 0x500 ; bobjIndex1, bobjIndex2, x, y, z
+call SEffe::scriptSetGenericEffectValue, stor[18], 0x0, 0x1 ; effectIndex, genericIndex, value
+call SEffe::scriptAddLifespanAttachment, stor[18], 0x37 ; effectIndex, ticks
+mov 0x14, stor[23] ; source, dest
+wait stor[23] ; frames
+mov 0xca, stor[8] ; source, dest
+gosub inl[:LABEL_30] ; addr
+call Scus94491BpeSegment::scriptStartRumbleMode, 0x0, 0x2 ; joypadIndex, p1
+call Scus94491BpeSegment::scriptStartRumble, 0x0, 0x0, 0x14 ; joypadIndex, p1, duration
+mov 0x19, stor[23] ; source, dest
+wait stor[23] ; frames
+mov 0x7, stor[8] ; source, dest
+gosub inl[:LABEL_43] ; addr
+gosub inl[:LABEL_48] ; addr
+deallocate
+
+; FORK JMP
+LABEL_78:
+mov 0x6, stor[9] ; source, dest
+mov stor[9], stor[23] ; source, dest
+LABEL_79:
+call Battle::scriptAllocateEmptyEffectManagerChild, stor[stor[0], 12 + stor[23]] ; effectIndex
+mov stor[stor[0], 12 + stor[23]], stor[25] ; source, dest
+mov stor[28], stor[stor[stor[0], 25], 28] ; source, dest
+call SEffe::scriptSetRelativePosition, stor[25], stor[0], 0x0, 0x0, 0x0 ; bobjIndex1, bobjIndex2, x, y, z
+call SEffe::scriptLoadSameScriptAndJump, stor[25], inl[:LABEL_85] ; scriptIndex, address
+while stor[23], inl[:LABEL_79] ; counter, addr
+LABEL_80:
+jmp_cmp ==, 0x1, stor[11], inl[:LABEL_81] ; operand, left, right, addr
+yield
+jmp inl[:LABEL_80] ; addr
+LABEL_81:
+mov 0x0, stor[11] ; source, dest
+decr stor[9] ; operand
+jmp_cmp <=, 0x0, stor[9], inl[:LABEL_82] ; operand, left, right, addr
+jmp inl[:LABEL_83] ; addr
+LABEL_82:
+mov stor[stor[0], 13 + stor[9]], stor[25] ; source, dest
+mov 0x1, stor[stor[stor[0], 25], 15] ; source, dest
+yield
+jmp inl[:LABEL_80] ; addr
+LABEL_83:
+call Battle::scriptAllocateEmptyEffectManagerChild, stor[22] ; effectIndex
+call SEffe::scriptSetRelativePosition, stor[22], stor[0], 0x0, 0x0, 0x0 ; bobjIndex1, bobjIndex2, x, y, z
+mov stor[28], stor[stor[stor[0], 22], 28] ; source, dest
+call SEffe::scriptLoadSameScriptAndJump, stor[22], inl[:LABEL_84] ; scriptIndex, address
+yield
+jmp inl[:LABEL_80] ; addr
+
+; FORK JMP
+LABEL_84:
+call SEffe::allocateDeffTmd, stor[18], 0x31a00 ; effectIndex, flags
+call SEffe::FUN_801156f8, stor[18], stor[0], 0xffffffff ; effectIndex, scriptIndex, coord2Index
+call SEffe::scriptSetRelativeRotation, stor[18], 0xffffffff, 0x0, 0x0, 0xfffffc00 ; bobjIndex1, bobjIndex2, x, y, z
+call SEffe::scriptSetEffectZ, stor[18], 0xfffffb00 ; effectIndex, z
+rand 0x1000, stor[25] ; bound, dest
+rand 0x1000, stor[26] ; bound, dest
+rand 0x1000, stor[27] ; bound, dest
+call SEffe::scriptSetRelativeRotation, stor[0], 0xffffffff, stor[25], stor[26], stor[27] ; bobjIndex1, bobjIndex2, x, y, z
+rand 0x50, stor[10] ; bound, dest
+rand 0x50, stor[11] ; bound, dest
+rand 0x50, stor[12] ; bound, dest
+shr 0x1, stor[10] ; shift, val
+shr 0x1, stor[11] ; shift, val
+shr 0x1, stor[12] ; shift, val
+call SEffe::scriptAddRotationScalerAttachment, stor[0], 0xffffffff, stor[10], stor[11], stor[12], 0x0, 0x0, 0x0 ; effectIndex, unused, velocityX, velocityY, velocityZ, accelerationX, accelerationY, accelerationZ
+call SEffe::scriptSetRelativeScale, stor[18], 0xffffffff, 0x2000, 0x2000, 0x2000 ; bobjIndex1, bobjIndex2, x, y, z
+call SEffe::scriptSetRelativeColour, stor[18], 0xffffffff, 0xff, 0xff, 0xff ; bobjIndex1, bobjIndex2, r, g, b
+mov 0x2000, stor[14] ; source, dest
+call SEffe::scriptSetRelativePosition, stor[18], 0xffffffff, stor[14], 0x0, 0x0 ; bobjIndex1, bobjIndex2, x, y, z
+call SEffe::scriptAddRelativePositionScalerTicks1, stor[18], 0xffffffff, 0x4, 0x0, 0x0, 0x0 ; effectIndex, parentIndex, ticks, x, y, z
+mov 0x4, stor[23] ; source, dest
+wait stor[23] ; frames
+add 0x200, stor[stor[stor[0], 28], 9] ; amount, operand
+add 0x1, stor[stor[stor[0], 28], 13] ; amount, operand
+deallocate
+
+; FORK JMP
+LABEL_85:
+call SEffe::allocateDeffTmd, stor[18], 0x31a01 ; effectIndex, flags
+call SEffe::FUN_801156f8, stor[18], stor[0], 0xffffffff ; effectIndex, scriptIndex, coord2Index
+call SEffe::scriptSetEffectZ, stor[18], 0xfffffb00 ; effectIndex, z
+rand 0x1000, stor[25] ; bound, dest
+rand 0x1000, stor[26] ; bound, dest
+rand 0x1000, stor[27] ; bound, dest
+call SEffe::scriptSetRelativeRotation, stor[0], 0xffffffff, stor[25], stor[26], stor[27] ; bobjIndex1, bobjIndex2, x, y, z
+rand 0x50, stor[10] ; bound, dest
+rand 0x50, stor[11] ; bound, dest
+rand 0x50, stor[12] ; bound, dest
+call SEffe::scriptAddRotationScalerAttachment, stor[0], 0xffffffff, stor[10], stor[11], stor[12], 0x0, 0x0, 0x0 ; effectIndex, unused, velocityX, velocityY, velocityZ, accelerationX, accelerationY, accelerationZ
+call SEffe::scriptSetRelativeScale, stor[18], 0xffffffff, 0x2000, 0x2000, 0x2000 ; bobjIndex1, bobjIndex2, x, y, z
+call SEffe::scriptSetRelativeColour, stor[18], 0xffffffff, 0x0, 0x0, 0x0 ; bobjIndex1, bobjIndex2, r, g, b
+call SEffe::scriptAddConstantColourScalerAttachment, stor[18], 0xffffffff, 0x14, 0xff, 0xff, 0xff ; effectIndex, parentIndex, ticks, destR, destG, destB
+rand 0x1000, stor[25] ; bound, dest
+mov stor[25], stor[13] ; source, dest
+rand 0x200, stor[25] ; bound, dest
+add 0x800, stor[25] ; amount, operand
+mov stor[25], stor[14] ; source, dest
+call SEffe::scriptSetRelativePosition, stor[18], 0xffffffff, stor[14], 0x0, 0x0 ; bobjIndex1, bobjIndex2, x, y, z
+mov 0x0, stor[15] ; source, dest
+LABEL_86:
+jmp_cmp ==, 0x1, stor[15], inl[:LABEL_87] ; operand, left, right, addr
+yield
+jmp inl[:LABEL_86] ; addr
+LABEL_87:
+call SEffe::scriptAddLifespanAttachment, stor[18], 0x2 ; effectIndex, ticks
+call SEffe::allocateDeffTmd, stor[18], 0x31a00 ; effectIndex, flags
+call SEffe::FUN_801156f8, stor[18], stor[0], 0xffffffff ; effectIndex, scriptIndex, coord2Index
+call SEffe::scriptSetRelativeScale, stor[18], 0xffffffff, 0x2000, 0x2000, 0x2000 ; bobjIndex1, bobjIndex2, x, y, z
+call SEffe::scriptSetRelativeColour, stor[18], 0xffffffff, 0xff, 0xff, 0xff ; bobjIndex1, bobjIndex2, r, g, b
+call SEffe::scriptSetRelativeRotation, stor[18], 0xffffffff, 0x0, 0x0, 0xfffffc00 ; bobjIndex1, bobjIndex2, x, y, z
+call SEffe::scriptSetEffectZ, stor[18], 0xfffffb00 ; effectIndex, z
+call SEffe::scriptSetRelativePosition, stor[18], 0xffffffff, stor[14], 0x0, 0x0 ; bobjIndex1, bobjIndex2, x, y, z
+shr 0x1, stor[10] ; shift, val
+shr 0x1, stor[11] ; shift, val
+shr 0x1, stor[12] ; shift, val
+call SEffe::scriptAddRotationScalerAttachment, stor[0], 0xffffffff, stor[10], stor[11], stor[12], 0x0, 0x0, 0x0 ; effectIndex, unused, velocityX, velocityY, velocityZ, accelerationX, accelerationY, accelerationZ
+call SEffe::scriptAddRelativePositionScalerTicks1, stor[18], 0xffffffff, 0x4, 0x0, 0x0, 0x0 ; effectIndex, parentIndex, ticks, x, y, z
+mov 0x4, stor[23] ; source, dest
+wait stor[23] ; frames
+add 0x200, stor[stor[stor[0], 28], 9] ; amount, operand
+add 0x1, stor[stor[stor[0], 28], 13] ; amount, operand
+deallocate
+
+; FORK JMP
+LABEL_88:
+mov 0x0, stor[9] ; source, dest
+mov 0x0, stor[13] ; source, dest
+mov 0x0, stor[15] ; source, dest
+call SEffe::scriptAddRotationScalerAttachment, stor[0], 0xffffffff, 0x10, 0x20, 0x30, 0x0, 0x0, 0x0 ; effectIndex, unused, velocityX, velocityY, velocityZ, accelerationX, accelerationY, accelerationZ
+call SEffe::scriptSetRelativeColour, stor[0], 0xffffffff, 0x0, 0x0, 0x0 ; bobjIndex1, bobjIndex2, r, g, b
+call SEffe::scriptAddConstantColourScalerAttachment, stor[0], 0xffffffff, 0xc, 0x40, 0x40, 0x40 ; effectIndex, parentIndex, ticks, destR, destG, destB
+call SEffe::scriptSetEffectZ, stor[0], 0xfffffd00 ; effectIndex, z
+call SEffe::allocateDeffTmd, stor[19], 0x31a02 ; effectIndex, flags
+call SEffe::scriptSetRelativePosition, stor[19], stor[0], 0x0, 0x300, 0x0 ; bobjIndex1, bobjIndex2, x, y, z
+call SEffe::scriptSetRelativeColour, stor[19], 0xffffffff, 0x0, 0x0, 0x0 ; bobjIndex1, bobjIndex2, r, g, b
+mov 0x0, stor[stor[stor[0], 19], 9] ; source, dest
+call SEffe::scriptLoadSameScriptAndJump, stor[19], inl[:LABEL_94] ; scriptIndex, address
+LABEL_89:
+jmp_cmp >=, 0x7530, stor[9], inl[:LABEL_90] ; operand, left, right, addr
+mov 0x7530, stor[9] ; source, dest
+LABEL_90:
+call SEffe::scriptSetRelativeScale, stor[0], 0xffffffff, stor[9], stor[9], stor[9] ; bobjIndex1, bobjIndex2, x, y, z
+jmp_cmp ==, 0x0, stor[13], inl[:LABEL_91] ; operand, left, right, addr
+mov 0x0, stor[13] ; source, dest
+mov stor[9], stor[25] ; source, dest
+mul 0xb, stor[25] ; amount, operand
+div 0xa, stor[25] ; amount, operand
+call SEffe::scriptSetRelativeScale, stor[0], 0xffffffff, stor[25], stor[25], stor[25] ; bobjIndex1, bobjIndex2, x, y, z
+rand 0x2, stor[25] ; bound, dest
+add 0x3, stor[25] ; amount, operand
+call Scus94491BpeSegment::scriptPlaySound, 0xa, stor[25], 0x0, 0x0, 0x0, 0x0 ; soundFileIndex, soundIndex, unused1, unused2, initialDelay, repeatDelay
+jmp_cmp <=, 0x2000, stor[stor[stor[0], 19], 9], inl[:LABEL_91] ; operand, left, right, addr
+add 0x2000, stor[stor[stor[0], 19], 9] ; amount, operand
+call SEffe::scriptAddConstantColourScalerAttachment, stor[19], 0xffffffff, 0x4, 0x30, 0x30, 0x30 ; effectIndex, parentIndex, ticks, destR, destG, destB
+LABEL_91:
+jmp_cmp ==, 0x0, stor[11], inl[:LABEL_92] ; operand, left, right, addr
+rand 0x8, stor[25] ; bound, dest
+jmp_cmp !=, 0x0, stor[25], inl[:LABEL_92] ; operand, left, right, addr
+mov stor[9], stor[25] ; source, dest
+shr 0x2, stor[25] ; shift, val
+call SEffe::scriptAllocateElectricityEffect, stor[18], 0xffffffff, stor[25], 0x3, 0x700, 0x300, 0x1050770, 0x2 ; effectIndex, parentIndex, boltAngleRangeCutoff, boltCount, maxSegmentLength, boltAngleStep, flags, type
+call SEffe::scriptSetEffectZ, stor[18], 0xfffffe00 ; effectIndex, z
+call SEffe::scriptSetRelativeColour, stor[18], 0xffffffff, 0x80, 0x0, 0x0 ; bobjIndex1, bobjIndex2, r, g, b
+call SEffe::scriptSetRelativePosition, stor[18], stor[0], 0x0, 0x0, 0x0 ; bobjIndex1, bobjIndex2, x, y, z
+call SEffe::scriptAddLifespanAttachment, stor[18], 0x5 ; effectIndex, ticks
+LABEL_92:
+jmp_cmp !=, 0x0, stor[15], inl[:LABEL_93] ; operand, left, right, addr
+yield
+jmp inl[:LABEL_89] ; addr
+LABEL_93:
+call SEffe::scriptAddScaleScalerMultiplicativeAttachmentTicks, stor[0], 0xffffffff, 0x14, 0x0, 0x0, 0x0 ; effectIndex, parentIndex, ticks, x, y, z
+call SEffe::scriptAddConstantColourScalerAttachment, stor[19], 0xffffffff, 0x14, 0x0, 0x0, 0x0 ; effectIndex, parentIndex, ticks, destR, destG, destB
+mov 0x14, stor[23] ; source, dest
+wait stor[23] ; frames
+deallocate
+
+; FORK JMP
+LABEL_94:
+call SEffe::scriptSetEffectZ, stor[0], 0xfffffc00 ; effectIndex, z
+LABEL_95:
+call Battle::scriptCalculateCameraValue, 0x0, 0x0, 0x0, 0x0, stor[25] ; type, mode, component, scriptIndex, out
+call Battle::scriptCalculateCameraValue, 0x0, 0x0, 0x1, 0x0, stor[26] ; type, mode, component, scriptIndex, out
+call Battle::scriptCalculateCameraValue, 0x0, 0x0, 0x2, 0x0, stor[27] ; type, mode, component, scriptIndex, out
+call SEffe::scriptRotateBobjTowardsPoint, stor[0], 0xffffffff, stor[25], stor[26], stor[27] ; bobjIndex, parentIndex, x, y, z
+call SEffe::scriptSetRelativeScale, stor[0], 0xffffffff, stor[9], stor[9], stor[9] ; bobjIndex1, bobjIndex2, x, y, z
+yield
+jmp inl[:LABEL_95] ; addr
+LABEL_96:
+data 0x0
+data 0x1
+data 0x2
+data 0x3
+data 0x0
+data 0x1
+data 0x2
+data 0x0
+data 0x1
+data 0x0
+LABEL_97:
+data 0x0
+data 0x1
+data 0x2
+data 0x3
+data 0x1
+data 0x2
+data 0x3
+data 0x2
+data 0x3
+data 0x3
+LABEL_98:
+data 0x15
+data 0x15
+data 0x15
+data 0x15
+data 0x15
+data 0x15
+data 0x15
+data 0x15
+data 0x15
+data 0x15
