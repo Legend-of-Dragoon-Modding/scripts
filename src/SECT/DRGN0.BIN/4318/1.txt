@@ -217,16 +217,13 @@ LABEL_0:
 call Battle::scriptGetBentSlot, stor[28], stor[10], 0x0 ; bentIndex, charOrBentSlot, mode
 mov stor[8], var[128 + stor[10]][5] ; source, dest
 mov 0x3, var[128 + stor[10]][0] ; source, dest
-call Battle::scriptSetBentStat, stor[30], stor[8], ITEM_ID ; bentIndex, value, statIndex
+call Battle::scriptSetBentStat, stor[30], id[lod:pellet], ITEM_ID ; bentIndex, value, statIndex
 mov stor[8], var[45][119] ; source, dest
-call Battle::scriptSetTempItemMagicStats, stor[30] ; bentIndex
 call Battle::scriptCheckItemHit, stor[30], stor[28], stor[9] ; attackerIndex, defenderIndex, hit
 jmp_cmp ==, 0x0, stor[9], inl[:LABEL_2] ; operand, left, right, addr
 call Battle::scriptItemMagicAttack, stor[30], stor[28], stor[8], stor[8], stor[10] ; attackerIndex, defenderIndex, unused, damage, specialEffects
 mov stor[10], var[45][119] ; source, dest
 jmp_cmp ==, 0x0, stor[8], inl[:LABEL_1] ; operand, left, right, addr
-call Battle::scriptGetBentStat, stor[30], ITEM_PERCENTAGE, stor[10] ; bentIndex, statIndex, value
-jmp_cmp !=, 0x0, stor[10], inl[:LABEL_1] ; operand, left, right, addr
 call Battle::scriptGetBentStat, stor[30], STATUS, stor[10] ; bentIndex, statIndex, value
 jmp_cmp !&, 0x8, stor[10], inl[:LABEL_1] ; operand, left, right, addr
 shr 0x1, stor[8] ; shift, val
