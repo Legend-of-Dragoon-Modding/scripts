@@ -589,10 +589,16 @@ data 0x1500
 
 
 LABEL_39:
-mov 0x8, stor[8] ; source, dest
-LABEL_40:
-jmp_cmp <, 0x8, stor[8], inl[:LABEL_49] ; operand, left, right, addr
-jmp_cmp >, 0x0, stor[8], inl[:LABEL_39] ; operand, left, right, addr
+mov 0, stor[25] ; source, dest
+mov 0, stor[26] ; source, dest
+mov 0, stor[27] ; source, dest
+
+; @param int s8 rgb
+; @param int s28
+; @param int s30
+ALLOCATE_USE_ATTACK_ITEM_EFFECT_:
+jmp_cmp >, 0, stor[8], inl[:ALLOCATE_USE_ATTACK_ITEM_EFFECT_NEGATIVE] ; we use negative numbers to handle items with special colours
+
 call Battle::scriptAllocateEmptyEffectManagerChild, stor[18] ; effectIndex
 mov stor[30], stor[stor[stor[0], 18], 30] ; source, dest
 mov stor[28], stor[stor[stor[0], 18], 28] ; source, dest
@@ -600,16 +606,53 @@ mov stor[8], stor[stor[stor[0], 18], 31] ; source, dest
 call SEffe::scriptLoadSameScriptAndJump, stor[18], inl[:LABEL_41] ; scriptIndex, address
 return
 
+ALLOCATE_USE_ATTACK_ITEM_EFFECT_NEGATIVE:
+neg stor[8]
+jmp inl[:LABEL_49]
+
+
+
+; variables to hold unpacked colours below
+UNPACKED_COLOURS_R:
+data 0
+UNPACKED_COLOURS_G:
+data 0
+UNPACKED_COLOURS_B:
+data 0
+
+
+
 ; FORK RE-ENTRY
+; @param s30 (parent s30)
+; @param s28 (parent s28)
+; @param int s31 rgb
 LABEL_41:
+
+; Unpack rgb
+debug98 stor[31]
+mov stor[31], inl[:UNPACKED_COLOURS_R]
+mov stor[31], inl[:UNPACKED_COLOURS_G]
+mov stor[31], inl[:UNPACKED_COLOURS_B]
+shr  8, inl[:UNPACKED_COLOURS_G]
+shr 16, inl[:UNPACKED_COLOURS_B]
+and 0xff, inl[:UNPACKED_COLOURS_R]
+and 0xff, inl[:UNPACKED_COLOURS_G]
+and 0xff, inl[:UNPACKED_COLOURS_B]
+
+debug98 stor[25]
+debug98 stor[26]
+debug98 stor[27]
 gosub inl[:LABEL_42] ; addr
+debug98 stor[25]
+debug98 stor[26]
+debug98 stor[27]
 call Battle::allocateBillboardSpriteEffect, stor[18], 0xfff25 ; effectIndex, flags
 call SEffe::scriptSetRelativePosition, stor[18], 0xffffffff, stor[20], stor[21], stor[22] ; bobjIndex1, bobjIndex2, x, y, z
 call SEffe::scriptSetRelativeScale, stor[18], 0xffffffff, 0x500, 0x500, 0x500 ; bobjIndex1, bobjIndex2, x, y, z
 call SEffe::scriptAddRotationScalerAttachment, stor[18], stor[18], 0x0, 0xfffffe00, 0xfffffe00, 0x0, 0x0, 0x0 ; effectIndex, unused, velocityX, velocityY, velocityZ, accelerationX, accelerationY, accelerationZ
 call SEffe::scriptAddRelativePositionScalerTicks1, stor[18], 0xffffffff, 0xf, stor[10], stor[11], stor[12] ; effectIndex, parentIndex, ticks, x, y, z
 call SEffe::scriptUpdateParabolicPositionScalerAttachment, stor[18], 0xffffffff, 0x0, 0x2000, 0x0 ; effectIndex, unused, accelerationX, accelerationY, accelerationZ
-call SEffe::scriptSetRelativeColour, stor[18], 0xffffffff, inl[:LABEL_46[stor[31]]], inl[:LABEL_47[stor[31]]], inl[:LABEL_48[stor[31]]] ; bobjIndex1, bobjIndex2, r, g, b
+call SEffe::scriptSetRelativeColour, stor[18], 0xffffffff, inl[:UNPACKED_COLOURS_R], inl[:UNPACKED_COLOURS_G], inl[:UNPACKED_COLOURS_B] ; bobjIndex1, bobjIndex2, r, g, b
 call SEffe::scriptAddLifespanAttachment, stor[18], 0xf ; effectIndex, ticks
 call SEffe::scriptAllocateParticleEffect, stor[19], stor[18], 0xfff3e, 0x20, 0x40, 0xc, 0x200, 0x0, 0x37 ; effectIndex, parentIndex, type, count, p4, p5, p6, p7, type2
 call SEffe::scriptSetRelativePosition, stor[19], 0xffffffff, stor[20], stor[21], stor[22] ; bobjIndex1, bobjIndex2, x, y, z
@@ -650,7 +693,7 @@ call SEffe::scriptAddLifespanAttachment, stor[19], 0x14 ; effectIndex, ticks
 call SEffe::scriptAllocateParticleEffect, stor[19], stor[18], 0xfff25, 0x10, 0x200, 0x2, 0x200, 0x40c7f00, 0x27 ; effectIndex, parentIndex, type, count, p4, p5, p6, p7, type2
 call SEffe::scriptSetRelativePosition, stor[19], 0xffffffff, stor[10], stor[11], stor[12] ; bobjIndex1, bobjIndex2, x, y, z
 call SEffe::scriptSetRelativeScale, stor[19], 0xffffffff, 0x300, 0x300, 0x300 ; bobjIndex1, bobjIndex2, x, y, z
-call SEffe::scriptSetRelativeColour, stor[19], 0xffffffff, inl[:LABEL_46[stor[31]]], inl[:LABEL_47[stor[31]]], inl[:LABEL_48[stor[31]]] ; bobjIndex1, bobjIndex2, r, g, b
+call SEffe::scriptSetRelativeColour, stor[19], 0xffffffff, inl[:UNPACKED_COLOURS_R], inl[:UNPACKED_COLOURS_G], inl[:UNPACKED_COLOURS_B] ; bobjIndex1, bobjIndex2, r, g, b
 call SEffe::scriptSetGenericEffectValue, stor[19], 0x0, 0x1 ; effectIndex, genericIndex, value
 call SEffe::scriptAddLifespanAttachment, stor[19], 0x14 ; effectIndex, ticks
 mov 0x14, stor[23] ; source, dest
@@ -689,7 +732,10 @@ LABEL_45:
 gosub inl[:LABEL_57] ; addr
 memcpy 0x3, stor[24], stor[10] ; size, src, dest
 jmp inl[:LABEL_44] ; addr
-LABEL_46:
+
+
+
+ELEMENT_COLOUR_RED:
 data 0xff
 data 0x51
 data 0x55
@@ -699,7 +745,10 @@ data 0xe8
 data 0x10
 data 0x0
 data 0xf5
-LABEL_47:
+
+
+
+ELEMENT_COLOUR_GREEN:
 data 0x20
 data 0xa6
 data 0xc8
@@ -709,7 +758,10 @@ data 0xe0
 data 0x10
 data 0x0
 data 0xff
-LABEL_48:
+
+
+
+ELEMENT_COLOUR_BLUE:
 data 0x0
 data 0xe8
 data 0x83
@@ -719,6 +771,9 @@ data 0x88
 data 0xd8
 data 0x0
 data 0xd7
+
+
+
 LABEL_49:
 sub 0x9, stor[8] ; amount, operand
 jmp inl[:LABEL_50] ; addr
@@ -1252,7 +1307,7 @@ rel :USE_ATTACK_ITEM ; psyche bomb x
 
 USE_TOTAL_VANISHING:
 mov 0x8, stor[8] ; source, dest
-gosub inl[:LABEL_126] ; addr
+gosub inl[:THROW_ATTACK_ITEM] ; addr
 mov stor[29], stor[8] ; source, dest
 mov stor[0], stor[30] ; source, dest
 gosub inl[:LABEL_60] ; addr
@@ -1408,9 +1463,13 @@ mov stor[29], stor[8] ; source, dest
 add 0xc0, stor[8] ; amount, operand
 ; load item deff
 call Battle::scriptLoadDeff, stor[8], stor[0], stor[28], 0x0, 0x2000000 ; flagsAndIndex, bentIndex, p2, scriptEntrypoint, type
-gosub inl[:GET_ITEM_ELEMENT_COLOUR_INDEX] ; returns s8, used downstream, passed into forked script
+
+; pull element colour out of element registry
+call Battle::scriptGetBentStat, stor[0], ITEM_ELEMENT, reg[0] ; r0 = item element
+call Scus94491BpeSegment_8002::scriptReadRegistryEntryVar, id[lod_core:elements], reg[0], 0, stor[8] ; s8 = packed element rgb
+
 LABEL_113:
-gosub inl[:LABEL_126] ; addr
+gosub inl[:THROW_ATTACK_ITEM] ; addr
 call Battle::scriptTickDeffLoadingStage, 0x1 ; loadingStage
 call Battle::scriptTickDeffLoadingStage, 0x2 ; loadingStage
 call Battle::scriptTickDeffLoadingStage, 0x3 ; loadingStage
@@ -1419,40 +1478,6 @@ gosub inl[:LABEL_436] ; addr
 mov 0xa, stor[23] ; source, dest
 wait stor[23] ; frames
 return
-
-
-
-; SUBROUTINE
-GET_ITEM_ELEMENT_COLOUR_INDEX:
-call Battle::scriptGetBentStat, stor[0], ITEM_ELEMENT, stor[8] ; s8 = item element
-mov 0x1, stor[9] ; s9 = 1
-mov 0x0, stor[10] ; s10 = 0
-
-; get element index
-LABEL_115:
-jmp_cmp &, stor[9], stor[8], inl[:LABEL_116] ; operand, left, right, addr
-shl 0x1, stor[9] ; right, left
-incr stor[10] ; operand
-jmp_cmp >, 0x8, stor[10], inl[:LABEL_115] ; operand, left, right, addr
-
-mov 0x8, stor[8] ; source, dest
-return
-
-LABEL_116:
-mov inl[:ELEMENT_INDEX_TO_COLOUR_INDEX[stor[10]]], stor[8] ; source, dest
-return
-
-
-
-ELEMENT_INDEX_TO_COLOUR_INDEX:
-data 0x1
-data 0x4
-data 0x6
-data 0x8
-data 0x3
-data 0x5
-data 0x2
-data 0x0
 
 
 
@@ -1543,26 +1568,40 @@ LABEL_123:
 data 0x1
 data 0x4e
 data 0xb0
+
+
+
 USE_PANIC_BELL:
 gosub inl[:LABEL_124] ; addr
 call Battle::scriptLoadDeff, 0xd4, stor[0], stor[28], 0x0, 0x2000000 ; flagsAndIndex, bentIndex, p2, scriptEntrypoint, type
-mov 0xb, stor[8] ; source, dest
+mov -11, stor[8] ; source, dest
 jmp inl[:LABEL_113] ; addr
+
+
+
 USE_MIDNIGHT_TERROR:
 gosub inl[:LABEL_124] ; addr
 call Battle::scriptLoadDeff, 0xda, stor[0], stor[28], 0x0, 0x2000000 ; flagsAndIndex, bentIndex, p2, scriptEntrypoint, type
-mov 0xc, stor[8] ; source, dest
+mov -12, stor[8] ; source, dest
 jmp inl[:LABEL_113] ; addr
+
+
+
 USE_STUNNING_HAMMER:
 gosub inl[:LABEL_124] ; addr
 call Battle::scriptLoadDeff, 0xd7, stor[0], stor[28], 0x0, 0x2000000 ; flagsAndIndex, bentIndex, p2, scriptEntrypoint, type
-mov 0xd, stor[8] ; source, dest
+mov -13, stor[8] ; source, dest
 jmp inl[:LABEL_113] ; addr
+
+
+
 USE_POISON_NEEDLE:
 gosub inl[:LABEL_124] ; addr
 call Battle::scriptLoadDeff, 0xd9, stor[0], stor[28], 0x0, 0x2000000 ; flagsAndIndex, bentIndex, p2, scriptEntrypoint, type
-mov 0x10, stor[8] ; source, dest
+mov -16, stor[8] ; source, dest
 jmp inl[:LABEL_113] ; addr
+
+
 
 ; SUBROUTINE
 LABEL_124:
@@ -1581,23 +1620,33 @@ data 0x4c
 data 0x500002c
 data 0x49
 
+
+
 ; SUBROUTINE
 LABEL_125:
 mov stor[0], var[80] ; source, dest
 mov stor[28], var[81] ; source, dest
 return
 
+
+
 ; SUBROUTINE
-LABEL_126:
+; @param int s8 rgb
+THROW_ATTACK_ITEM:
 gosub inl[:LABEL_125] ; addr
 call Battle::scriptSetLoadingBentAnimationIndex, stor[0], 0x7 ; bentIndex, animIndex
 call Scus94491BpeSegment::scriptPlaySound, 0x0, 0x15, 0x0, 0x0, 0xf, 0x0 ; soundFileIndex, soundIndex, unused1, unused2, initialDelay, repeatDelay
+
 mov 0x10, stor[23] ; source, dest
 wait stor[23] ; frames
-gosub inl[:LABEL_132] ; addr
+
+gosub inl[:ALLOCATE_USE_ATTACK_ITEM_EFFECT] ; addr
 mov 0x3, stor[8] ; source, dest
 gosub_table stor[8], inl[:LABEL_90] ; index, table
 jmp inl[:LABEL_127] ; addr
+
+
+
 data 0x148
 data 0x900ffd4
 data 0x1420238
@@ -1615,6 +1664,9 @@ data 0x0
 data 0x0
 data 0xf
 data 0x0
+
+
+
 LABEL_127:
 gosub inl[:WAIT_FOR_ANIMATION_TO_FINISH] ; addr
 gosub inl[:SET_IDLE_ANIMATION] ; addr
@@ -1622,6 +1674,8 @@ call Battle::scriptSetBentRotationY, stor[0], 0x400 ; bentIndex, y
 mov 0xa, stor[23] ; source, dest
 wait stor[23] ; frames
 return
+
+
 
 ; SUBROUTINE
 LABEL_128:
@@ -1662,8 +1716,11 @@ jmp_table stor[29], inl[:USE_ITEM_SUBS] ; index, table
 
 
 ; SUBROUTINE
-LABEL_132:
-jmp inl[:LABEL_40] ; addr
+; @param int s8 rgb
+; @param int s28
+; @param int s30
+ALLOCATE_USE_ATTACK_ITEM_EFFECT:
+jmp inl[:ALLOCATE_USE_ATTACK_ITEM_EFFECT_] ; addr
 
 ; SUBROUTINE
 ; @param int s8 0 = material shield, 1 = magical shield
@@ -7613,7 +7670,7 @@ return
 ; @return bool s8 0 if spell's target flag 0x80 is set, 1 otherwise or if spell is not active
 LABEL_605:
 call Battle::scriptGetBentSlot, stor[0], stor[8], 0x0 ; bentIndex, charOrBentSlot, mode
-jmp_cmp ==, 0x3, var[128 + stor[8]][0], inl[:LABEL_606] ; operand, left, right, addr
+jmp_cmp ==, 0x3, var[128 + stor[8]][0], inl[:LABEL_606] ; set to 3 when using an item DEFF
 jmp_cmp ==, 0x2, var[128 + stor[8]][0], inl[:LABEL_606] ; operand, left, right, addr
 mov var[128 + stor[8]][5], stor[9] ; source, dest
 call Battle::scriptSetBentStat, stor[0], stor[9], SPELL_ID ; bentIndex, value, statIndex
