@@ -6360,7 +6360,7 @@ jmp_cmp !&, 0x2, var[45][77], inl[:LABEL_483] ; unknown run away flag 0x2 not se
 jmp inl[:LABEL_488] ; addr
 LABEL_483:
 
-gosub inl[:HANDLE_DEATH] ; addr
+gosub inl[:HANDLE_DEATH_AFTER_VICTORY] ; addr
 
 ; sets scriptState_800c6914 to me
 mov stor[0], var[80] ; source, dest
@@ -6449,7 +6449,7 @@ jmp_cmp >, stor[8], stor[9], inl[:MAIN_LOOP_CLEAR_ALL_MONSTER_FORCED_TURNS] ; op
 yield
 MAIN_LOOP_SKIP_CLEAR_ALL_MONSTER_FORCED_TURNS:
 and 0xfffffff7, stor[7] ; clear "my turn" flag
-gosub inl[:HANDLE_DEATH] ; addr
+gosub inl[:HANDLE_DEATH_AFTER_VICTORY] ; addr
 call Battle::scriptFinishBentTurn, stor[0] ; bentIndex
 jmp inl[:MAIN_LOOP] ; addr
 
@@ -7902,7 +7902,7 @@ consume
 
 
 ; SUBROUTINE
-HANDLE_DEATH:
+HANDLE_DEATH_AFTER_VICTORY:
 ; if postBattleActionIndex_800bc974 != victory
 jmp_cmp !=, 0x1, var[57], inl[:HAVE_NOT_WON_YET] ; operand, left, right, addr
 
