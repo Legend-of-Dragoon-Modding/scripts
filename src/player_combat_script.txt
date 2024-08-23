@@ -629,7 +629,6 @@ data 0
 LABEL_41:
 
 ; Unpack rgb
-debug98 stor[31]
 mov stor[31], inl[:UNPACKED_COLOURS_R]
 mov stor[31], inl[:UNPACKED_COLOURS_G]
 mov stor[31], inl[:UNPACKED_COLOURS_B]
@@ -639,13 +638,7 @@ and 0xff, inl[:UNPACKED_COLOURS_R]
 and 0xff, inl[:UNPACKED_COLOURS_G]
 and 0xff, inl[:UNPACKED_COLOURS_B]
 
-debug98 stor[25]
-debug98 stor[26]
-debug98 stor[27]
 gosub inl[:LABEL_42] ; addr
-debug98 stor[25]
-debug98 stor[26]
-debug98 stor[27]
 call Battle::allocateBillboardSpriteEffect, stor[18], 0xfff25 ; effectIndex, flags
 call SEffe::scriptSetRelativePosition, stor[18], 0xffffffff, stor[20], stor[21], stor[22] ; bobjIndex1, bobjIndex2, x, y, z
 call SEffe::scriptSetRelativeScale, stor[18], 0xffffffff, 0x500, 0x500, 0x500 ; bobjIndex1, bobjIndex2, x, y, z
@@ -732,45 +725,6 @@ LABEL_45:
 gosub inl[:LABEL_57] ; addr
 memcpy 0x3, stor[24], stor[10] ; size, src, dest
 jmp inl[:LABEL_44] ; addr
-
-
-
-ELEMENT_COLOUR_RED:
-data 0xff
-data 0x51
-data 0x55
-data 0xd8
-data 0xe7
-data 0xe8
-data 0x10
-data 0x0
-data 0xf5
-
-
-
-ELEMENT_COLOUR_GREEN:
-data 0x20
-data 0xa6
-data 0xc8
-data 0xd4
-data 0xe7
-data 0xe0
-data 0x10
-data 0x0
-data 0xff
-
-
-
-ELEMENT_COLOUR_BLUE:
-data 0x0
-data 0xe8
-data 0x83
-data 0x88
-data 0x78
-data 0x88
-data 0xd8
-data 0x0
-data 0xd7
 
 
 
