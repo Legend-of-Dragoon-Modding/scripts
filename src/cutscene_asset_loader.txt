@@ -1,0 +1,78 @@
+ASSETS:
+data 0x2
+data 0xc
+data 0x79
+data 0x70
+
+LOAD_BENT:
+gosub inl[:LOAD_BENT_ASSETS]
+gosub inl[:WAIT_ASSET_LOAD]
+return
+
+LOAD_BENT_ASSETS:
+call 600, stor[12]
+mov 0x0, stor[stor[stor[0], 12], 14]
+mov 0x1, stor[stor[stor[0], 12], 24]
+call 618, stor[12], inl[:ASSET_LOADER]
+return
+  
+ASSET_LOADER:
+mov 0x0, var[45][17]
+shl 0x2, stor[14]
+ASSET_LOADER_MAIN:
+yield
+mov inl[:ASSETS[stor[14]]], stor[19]
+incr stor[14]
+mov inl[:ASSETS[stor[14]]], stor[13]
+incr stor[14]
+mov inl[:ASSETS[stor[14]]], stor[16]
+incr stor[14]
+mov inl[:ASSETS[stor[14]]], stor[18]
+incr stor[14]
+jmp_cmp ==, stor[13], stor[16], inl[:TEXTURE_LOADER]
+jmp_cmp ==, 0x0, stor[16], inl[:ANIM_LOADER]
+call 357, 0xffffffff, stor[8]
+call 354, 0x0, stor[18], stor[9]
+call 355, stor[9]
+call 361, stor[8], stor[9]
+incr stor[18]
+call 354, 0x0, stor[18], stor[9]
+call 355, stor[9]
+call 364, stor[8], stor[9]
+call 356, stor[9]
+call 354, 0x0, stor[16], stor[9]
+call 355, stor[9]
+call 363, stor[8], 0x0, stor[9]
+yield
+call 360, 0x10, stor[8], stor[10]
+call 138, stor[10], 0x0
+yield
+mov stor[8], var[45][stor[19]]
+mov stor[10], var[45][stor[13]]
+decr stor[24]
+jmp_cmp !=, stor[24], 0x0, inl[:ASSET_LOADER_MAIN]
+mov 0x4, var[45][17]
+deallocate
+ANIM_LOADER:
+mov var[45][stor[19]], stor[8]
+call 354, 0x0, stor[18], stor[9]
+call 355, stor[9]
+call 363, stor[8], stor[13], stor[9]
+decr stor[24]
+jmp_cmp !=, stor[24], 0x0, inl[:ASSET_LOADER_MAIN]
+mov 0x4, var[45][17]
+deallocate
+TEXTURE_LOADER:
+call 354, 0x0, stor[18], stor[9]
+call 355, stor[9]
+call 364, 0xffffffff, stor[9]
+call 356, stor[9]
+decr stor[24]
+jmp_cmp !=, stor[24], 0x0, inl[:ASSET_LOADER_MAIN]
+mov 0x4, var[45][17]
+deallocate
+
+WAIT_ASSET_LOAD:
+yield
+jmp_cmp !=, var[45][17], 0x4, inl[:WAIT_ASSET_LOAD]
+return
